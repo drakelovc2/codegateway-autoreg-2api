@@ -64,6 +64,45 @@ export OPENAI_API_KEY=sk-cg-...
 - **Бины**: сгенерированные PAN проходят только у «авто-аппрув» диапазонов; Stripe
   валидирует 8-значный BIN (`incorrect_number` для неизвестных).
 
+## Peak (api.peak.fo) — 1 000 бесплатных решений
+
+Peak — платный солвер Turnstile/Cloudflare-5s, но при регистрации дают **1 000 решений
+без карты**. Полезен как fallback к бесплатному camoufox и, главное, умеет минтить токен
+**через твой прокси** (`turnstiletask`) — с того же IP, откуда пойдёт сабмит.
+
+1. Открой <https://peak.fo/login> и нажми **«Create an account»** (кнопка под формой входа;
+   отдельного `/register` нет — он редиректит на `/login`).
+2. Укажи **email + пароль**. Gmail и свой домен подходят; одноразовые домены могут не
+   пройти — если письма нет, проверь спам или смени домен.
+3. Если просят подтвердить почту — перейди по ссылке из письма.
+4. В дашборде <https://peak.fo/dashboard> → **API Keys** → создай ключ (`pk_…`).
+   На аккаунт начисляются **1 000 бесплатных решений** (без карты).
+5. Проверь баланс:
+   ```bash
+   curl -s -H "X-API-Key: pk_..." https://api.peak.fo/balance
+   # {"success":true,"data":{"type":"pay_per_solve","balance":0.8607}}
+   ```
+6. Подключи к реггеру: `"peak_api_key": "pk_..."`, `"turnstile_solver": "auto"`.
+   Режим `auto`: camoufox ($0) → Peak → capsolver.
+
+### Запрос к Peak
+
+```json
+{"task_type": "turnstiletask", "sitekey": "0x4AAAAAAA...",
+ "url": "https://example.com/", "proxy": "http://user:pass@1.2.3.4:8080"}
+```
+
+- `url` **обязан заканчиваться слэшем** (`.../register/`);
+- поле именно `sitekey` (не `siteKey`);
+- `turnstiletaskproxyless` — без прокси (sitekey+url), `cloudflare5stask` — url+proxy.
+
+### Ограничения
+
+- 1 000 решений — разово на аккаунт, дальше pay-per-solve.
+- `challenge_flagged` = **IP грязный**, Cloudflare пометил его до решения; солвер не поможет,
+  нужен чистый residential.
+- Тестовые sitekey Cloudflare заблокированы (`task_blocked`).
+
 ## Ограничения
 
 - Только для собственных/разрешённых аккаунтов и тестов. Не абузь сервисы.
