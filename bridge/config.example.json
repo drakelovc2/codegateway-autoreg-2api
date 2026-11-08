@@ -1,0 +1,30 @@
+{
+  "_комментарий": "codegateway2api — OpenAI/Anthropic-совместимый мост к пулу ключей CodeGateway. Банк — accounts.jsonl реггера (hot-reload по mtime). client_keys: пусто = клиентский ключ не проверять (слушает 127.0.0.1).",
+  "port": 12067,
+  "host": "127.0.0.1",
+  "upstream": "https://api.codegateway.dev/v1",
+  "accounts_file": "../register/data/accounts.jsonl",
+  "client_keys": [],
+  "keys": [],
+  "log": {
+    "file": "bridge.log",
+    "max_bytes": 5242880,
+    "backup_count": 5
+  },
+  "bridge": {
+    "strategy": "least_used",
+    "max_attempts": 3,
+    "retry_base_sec": 0.6,
+    "retry_max_sleep": 5.0,
+    "cooldown_429_sec": 30,
+    "cooldown_5xx_sec": 10,
+    "fails_to_dead": 4,
+    "r429_to_exhausted": 2,
+    "exhausted_park_min": 60,
+    "bank_poll_sec": 5,
+    "min_usd_left": 0.0,
+    "upstream_connect_timeout": 20,
+    "upstream_read_timeout": 600,
+    "models_cache_sec": 600
+  }
+}

@@ -1,0 +1,5 @@
+requests>=2.31
+# браузерная рега и карточный шаг
+playwright>=1.40
+# антидетект-браузер для Turnstile (опционально: можно Peak/capsolver)
+camoufox>=0.4
