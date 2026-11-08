@@ -38,8 +38,10 @@
   },
   "mail_only_gmail": false,
   "stripe_pk": "pk_live_REPLACE_ME",
-  "card_bins": [],
-  "card_bin_mode": "off",
+  "card_bins": [
+    "42178330"
+  ],
+  "card_bin_mode": "any",
   "card_max_attempts": 6,
   "bonus_wait_sec": 60,
   "card_ttl_years": [
@@ -62,5 +64,6 @@
   "verbose_log": true,
   "output_jsonl": "data/accounts.jsonl",
   "output_combo": "data/accounts.txt",
-  "fallback_free_models": []
+  "fallback_free_models": [],
+  "_card_note": "Бины: 6-8 цифр или маска с x. Stripe валидирует 8-значный префикс — 42178330 проходит; 461994 (Visa NP) выгорел после ~9 аккаунтов. card_bin_mode: any | live | off (off = фиксированная карта из card_number..)."
 }

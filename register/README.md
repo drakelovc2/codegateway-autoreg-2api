@@ -31,7 +31,7 @@ OpenAI-совместимый). Панель реггера — **:9945**.
 | Behavioral-блок | при «грязных» IP сервис отдаёт `403 behavioral_blocked` — лечится только чистым residential |
 | Stripe tokenization | `createPaymentMethod` с сырыми данными и `confirm` с `payment_method_data` → `unsupported_publishable_key_tokenization_surface`. Только Element на домене мерчанта |
 | `confirmCardSetup` в браузере | проходит проверку поверхности, но **зависает**: Radar гоняет hCaptcha, в headless не решается. Поэтому confirm — серверный, с `payment_method=pm_…` |
-| Бины | сгенерированные PAN проходят только у «авто-аппрув» диапазонов; обычные бины дают `card_declined/generic_decline`, неизвестные Stripe — `incorrect_number` (валидируется 8-значный префикс) |
+| Бины | `42178330` (Visa, US) проходит; `461994` (Visa, NP) выгорел после ~9 аккаунтов (`generic_decline`). Stripe валидирует **8-значный** префикс — 6-значный даёт `incorrect_number`. Список — в `config.json → card_bins` |
 | Прокси | некоторые провайдеры режут `CONNECT api.stripe.com`. HTTP к CodeGateway через прокси можно, карточный шаг — напрямую (`card_step_direct: true`) |
 | Auto Top-Up | после привязки карты остаётся выключенным (`enabled:false`) — карта хранится, но автоматических списаний нет |
 
