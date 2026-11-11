@@ -112,3 +112,9 @@ Peak — платный солвер Turnstile/Cloudflare-5s, но при рег
 ## Лицензия
 
 MIT + условие добросовестного использования — см. [LICENSE](LICENSE).
+
+---
+
+🔥 Telegram: [@antivibedrake](https://t.me/antivibedrake) · [@zakurulife](https://t.me/zakurulife)
+
+Только для личного использования — см. [DISCLAIMER.md](DISCLAIMER.md).
